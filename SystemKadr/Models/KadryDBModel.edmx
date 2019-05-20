@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KadryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Godziny_przepracowane">
+          <Key>
+            <PropertyRef Name="Id_wpisu" />
+          </Key>
+          <Property Name="Id_wpisu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identyfikator" Type="int" />
+          <Property Name="Data" Type="date" />
+          <Property Name="Godziny" Type="int" />
+        </EntityType>
+        <EntityType Name="Pracownicy">
+          <Key>
+            <PropertyRef Name="Identyfikator" />
+          </Key>
+          <Property Name="Identyfikator" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="nchar" MaxLength="10" />
+          <Property Name="Nazwisko" Type="nchar" MaxLength="10" />
+          <Property Name="PESEL" Type="int" />
+          <Property Name="Wydzial" Type="int" />
+          <Property Name="Stawka_zaszeregowana" Type="float" Nullable="false" />
+          <Property Name="Rodzaj_umowy" Type="nchar" MaxLength="30" />
+          <Property Name="Data_podjecia_pracy" Type="nchar" MaxLength="10" />
+          <Property Name="Miejscowosc" Type="nchar" MaxLength="10" />
+          <Property Name="Rola" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_rola" />
+          </Key>
+          <Property Name="Id_rola" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Wydzialy">
+          <Key>
+            <PropertyRef Name="Id_wydzialu" />
+          </Key>
+          <Property Name="Id_wydzialu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Wyplaty">
+          <Key>
+            <PropertyRef Name="Id_tranzakcji" />
+          </Key>
+          <Property Name="Id_tranzakcji" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identyfikator" Type="int" />
+          <Property Name="Miesiac" Type="nchar" MaxLength="10" />
+          <Property Name="Wyplata" Type="float" />
+        </EntityType>
+        <Association Name="FK_Godziny_przepracowane_ToTable">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1" />
+          <End Role="Godziny_przepracowane" Type="Self.Godziny_przepracowane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="Identyfikator" />
+            </Principal>
+            <Dependent Role="Godziny_przepracowane">
+              <PropertyRef Name="Identyfikator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pracownicy_ToTable">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id_rola" />
+            </Principal>
+            <Dependent Role="Pracownicy">
+              <PropertyRef Name="Rola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pracownicy_ToTable_1">
+          <End Role="Wydzialy" Type="Self.Wydzialy" Multiplicity="0..1" />
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wydzialy">
+              <PropertyRef Name="Id_wydzialu" />
+            </Principal>
+            <Dependent Role="Pracownicy">
+              <PropertyRef Name="Wydzial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wyplaty_ToTable">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1" />
+          <End Role="Wyplaty" Type="Self.Wyplaty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="Identyfikator" />
+            </Principal>
+            <Dependent Role="Wyplaty">
+              <PropertyRef Name="Identyfikator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KadryDBModelStoreContainer">
+          <EntitySet Name="Godziny_przepracowane" EntityType="Self.Godziny_przepracowane" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pracownicy" EntityType="Self.Pracownicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wydzialy" EntityType="Self.Wydzialy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wyplaty" EntityType="Self.Wyplaty" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Godziny_przepracowane_ToTable" Association="Self.FK_Godziny_przepracowane_ToTable">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Godziny_przepracowane" EntitySet="Godziny_przepracowane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pracownicy_ToTable" Association="Self.FK_Pracownicy_ToTable">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pracownicy_ToTable_1" Association="Self.FK_Pracownicy_ToTable_1">
+            <End Role="Wydzialy" EntitySet="Wydzialy" />
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wyplaty_ToTable" Association="Self.FK_Wyplaty_ToTable">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Wyplaty" EntitySet="Wyplaty" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KadryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Godziny_przepracowane">
+          <Key>
+            <PropertyRef Name="Id_wpisu" />
+          </Key>
+          <Property Name="Id_wpisu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identyfikator" Type="Int32" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+          <Property Name="Godziny" Type="Int32" />
+          <NavigationProperty Name="Pracownicy" Relationship="Self.FK_Godziny_przepracowane_ToTable" FromRole="Godziny_przepracowane" ToRole="Pracownicy" />
+        </EntityType>
+        <EntityType Name="Pracownicy">
+          <Key>
+            <PropertyRef Name="Identyfikator" />
+          </Key>
+          <Property Name="Identyfikator" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Nazwisko" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PESEL" Type="Int32" />
+          <Property Name="Wydzial" Type="Int32" />
+          <Property Name="Stawka_zaszeregowana" Type="Double" Nullable="false" />
+          <Property Name="Rodzaj_umowy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Data_podjecia_pracy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Miejscowosc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Rola" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Godziny_przepracowane" Relationship="Self.FK_Godziny_przepracowane_ToTable" FromRole="Pracownicy" ToRole="Godziny_przepracowane" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Pracownicy_ToTable" FromRole="Pracownicy" ToRole="Role" />
+          <NavigationProperty Name="Wydzialy" Relationship="Self.FK_Pracownicy_ToTable_1" FromRole="Pracownicy" ToRole="Wydzialy" />
+          <NavigationProperty Name="Wyplaty" Relationship="Self.FK_Wyplaty_ToTable" FromRole="Pracownicy" ToRole="Wyplaty" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_rola" />
+          </Key>
+          <Property Name="Id_rola" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Pracownicy" Relationship="Self.FK_Pracownicy_ToTable" FromRole="Role" ToRole="Pracownicy" />
+        </EntityType>
+        <EntityType Name="Wydzialy">
+          <Key>
+            <PropertyRef Name="Id_wydzialu" />
+          </Key>
+          <Property Name="Id_wydzialu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Pracownicy" Relationship="Self.FK_Pracownicy_ToTable_1" FromRole="Wydzialy" ToRole="Pracownicy" />
+        </EntityType>
+        <EntityType Name="Wyplaty">
+          <Key>
+            <PropertyRef Name="Id_tranzakcji" />
+          </Key>
+          <Property Name="Id_tranzakcji" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identyfikator" Type="Int32" />
+          <Property Name="Miesiac" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Wyplata" Type="Double" />
+          <NavigationProperty Name="Pracownicy" Relationship="Self.FK_Wyplaty_ToTable" FromRole="Wyplaty" ToRole="Pracownicy" />
+        </EntityType>
+        <Association Name="FK_Godziny_przepracowane_ToTable">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1" />
+          <End Role="Godziny_przepracowane" Type="Self.Godziny_przepracowane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="Identyfikator" />
+            </Principal>
+            <Dependent Role="Godziny_przepracowane">
+              <PropertyRef Name="Identyfikator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pracownicy_ToTable">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id_rola" />
+            </Principal>
+            <Dependent Role="Pracownicy">
+              <PropertyRef Name="Rola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pracownicy_ToTable_1">
+          <End Role="Wydzialy" Type="Self.Wydzialy" Multiplicity="0..1" />
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wydzialy">
+              <PropertyRef Name="Id_wydzialu" />
+            </Principal>
+            <Dependent Role="Pracownicy">
+              <PropertyRef Name="Wydzial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wyplaty_ToTable">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1" />
+          <End Role="Wyplaty" Type="Self.Wyplaty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="Identyfikator" />
+            </Principal>
+            <Dependent Role="Wyplaty">
+              <PropertyRef Name="Identyfikator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KadryDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Godziny_przepracowane" EntityType="Self.Godziny_przepracowane" />
+          <EntitySet Name="Pracownicy" EntityType="Self.Pracownicy" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Wydzialy" EntityType="Self.Wydzialy" />
+          <EntitySet Name="Wyplaty" EntityType="Self.Wyplaty" />
+          <AssociationSet Name="FK_Godziny_przepracowane_ToTable" Association="Self.FK_Godziny_przepracowane_ToTable">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Godziny_przepracowane" EntitySet="Godziny_przepracowane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pracownicy_ToTable" Association="Self.FK_Pracownicy_ToTable">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pracownicy_ToTable_1" Association="Self.FK_Pracownicy_ToTable_1">
+            <End Role="Wydzialy" EntitySet="Wydzialy" />
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wyplaty_ToTable" Association="Self.FK_Wyplaty_ToTable">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Wyplaty" EntitySet="Wyplaty" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KadryDBModelStoreContainer" CdmEntityContainer="KadryDBEntities">
+          <EntitySetMapping Name="Godziny_przepracowane">
+            <EntityTypeMapping TypeName="KadryDBModel.Godziny_przepracowane">
+              <MappingFragment StoreEntitySet="Godziny_przepracowane">
+                <ScalarProperty Name="Id_wpisu" ColumnName="Id_wpisu" />
+                <ScalarProperty Name="Identyfikator" ColumnName="Identyfikator" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Godziny" ColumnName="Godziny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pracownicy">
+            <EntityTypeMapping TypeName="KadryDBModel.Pracownicy">
+              <MappingFragment StoreEntitySet="Pracownicy">
+                <ScalarProperty Name="Identyfikator" ColumnName="Identyfikator" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="PESEL" ColumnName="PESEL" />
+                <ScalarProperty Name="Wydzial" ColumnName="Wydzial" />
+                <ScalarProperty Name="Stawka_zaszeregowana" ColumnName="Stawka_zaszeregowana" />
+                <ScalarProperty Name="Rodzaj_umowy" ColumnName="Rodzaj_umowy" />
+                <ScalarProperty Name="Data_podjecia_pracy" ColumnName="Data_podjecia_pracy" />
+                <ScalarProperty Name="Miejscowosc" ColumnName="Miejscowosc" />
+                <ScalarProperty Name="Rola" ColumnName="Rola" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="KadryDBModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id_rola" ColumnName="Id_rola" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wydzialy">
+            <EntityTypeMapping TypeName="KadryDBModel.Wydzialy">
+              <MappingFragment StoreEntitySet="Wydzialy">
+                <ScalarProperty Name="Id_wydzialu" ColumnName="Id_wydzialu" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wyplaty">
+            <EntityTypeMapping TypeName="KadryDBModel.Wyplaty">
+              <MappingFragment StoreEntitySet="Wyplaty">
+                <ScalarProperty Name="Id_tranzakcji" ColumnName="Id_tranzakcji" />
+                <ScalarProperty Name="Identyfikator" ColumnName="Identyfikator" />
+                <ScalarProperty Name="Miesiac" ColumnName="Miesiac" />
+                <ScalarProperty Name="Wyplata" ColumnName="Wyplata" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
