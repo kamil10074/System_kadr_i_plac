@@ -25,7 +25,7 @@
           <Property Name="Wydzial" Type="int" />
           <Property Name="Stawka_zaszeregowana" Type="float" Nullable="false" />
           <Property Name="Rodzaj_umowy" Type="nchar" MaxLength="30" />
-          <Property Name="Data_podjecia_pracy" Type="nchar" MaxLength="10" />
+          <Property Name="Data_podjecia_pracy" Type="date" />
           <Property Name="Miejscowosc" Type="nchar" MaxLength="10" />
           <Property Name="Rola" Type="int" Nullable="false" />
         </EntityType>
@@ -34,14 +34,14 @@
             <PropertyRef Name="Id_rola" />
           </Key>
           <Property Name="Id_rola" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nazwa" Type="nchar" MaxLength="10" />
+          <Property Name="Rola" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Wydzialy">
           <Key>
             <PropertyRef Name="Id_wydzialu" />
           </Key>
           <Property Name="Id_wydzialu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nazwa" Type="nchar" MaxLength="5" />
+          <Property Name="Wydzial" Type="nchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="Wyplaty">
           <Key>
@@ -149,7 +149,7 @@
           <Property Name="Wydzial" Type="Int32" />
           <Property Name="Stawka_zaszeregowana" Type="Double" Nullable="false" />
           <Property Name="Rodzaj_umowy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="Data_podjecia_pracy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Data_podjecia_pracy" Type="DateTime" Precision="0" />
           <Property Name="Miejscowosc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Rola" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Godziny_przepracowane" Relationship="Self.FK_Godziny_przepracowane_ToTable" FromRole="Pracownicy" ToRole="Godziny_przepracowane" />
@@ -162,7 +162,7 @@
             <PropertyRef Name="Id_rola" />
           </Key>
           <Property Name="Id_rola" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nazwa" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Rola" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Pracownicy" Relationship="Self.FK_Pracownicy_ToTable" FromRole="Role" ToRole="Pracownicy" />
         </EntityType>
         <EntityType Name="Wydzialy">
@@ -170,7 +170,7 @@
             <PropertyRef Name="Id_wydzialu" />
           </Key>
           <Property Name="Id_wydzialu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nazwa" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Wydzial" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Pracownicy" Relationship="Self.FK_Pracownicy_ToTable_1" FromRole="Wydzialy" ToRole="Pracownicy" />
         </EntityType>
         <EntityType Name="Wyplaty">
@@ -290,7 +290,7 @@
             <EntityTypeMapping TypeName="KadryDBModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="Id_rola" ColumnName="Id_rola" />
-                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Rola" ColumnName="Rola" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -298,7 +298,7 @@
             <EntityTypeMapping TypeName="KadryDBModel.Wydzialy">
               <MappingFragment StoreEntitySet="Wydzialy">
                 <ScalarProperty Name="Id_wydzialu" ColumnName="Id_wydzialu" />
-                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Wydzial" ColumnName="Wydzial" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

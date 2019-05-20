@@ -21,7 +21,7 @@ namespace SystemKadr.Models
         }
     
         public int Id_rola { get; set; }
-        public string Nazwa { get; set; }
+        public string Rola { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pracownicy> Pracownicy { get; set; }

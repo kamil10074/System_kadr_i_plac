@@ -28,7 +28,7 @@ namespace SystemKadr.Models
         public Nullable<int> Wydzial { get; set; }
         public double Stawka_zaszeregowana { get; set; }
         public string Rodzaj_umowy { get; set; }
-        public string Data_podjecia_pracy { get; set; }
+        public Nullable<System.DateTime> Data_podjecia_pracy { get; set; }
         public string Miejscowosc { get; set; }
         public int Rola { get; set; }
     
