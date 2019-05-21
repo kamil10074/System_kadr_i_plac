@@ -18,7 +18,7 @@ namespace SystemKadr.Controllers
         public ActionResult Index()
         {
             var pracownicy = db.Pracownicy.Include(p => p.Role).Include(p => p.Wydzialy);
-            return View(pracownicy.ToList());
+            return View(pracownicy);
         }
 
         // GET: Pracownicy/Details/5

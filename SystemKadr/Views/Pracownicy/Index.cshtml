@@ -4,41 +4,43 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista pracownikow</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj pracownika", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Imie)
+            Imie
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Nazwisko)
+            Nazwisko
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PESEL)
+            Pesel
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Stawka_zaszeregowana)
+            Stawka zaszeregowana
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Rodzaj_umowy)
+            Rodzaj umowy
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Data_podjecia_pracy)
+            Data podjecia pracy
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Miejscowosc)
+            Miejscowosc
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Role.Rola)
+            Rola
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Wydzialy.Wydzial)
+            Wydzial
         </th>
-        <th></th>
+        <th>
+            Opcje
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -71,9 +73,9 @@
             @Html.DisplayFor(modelItem => item.Wydzialy.Wydzial)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Identyfikator }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Identyfikator }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Identyfikator })
+            @Html.ActionLink("Edytuj", "Edit", new { id = item.Identyfikator }) |
+            @Html.ActionLink("Szczegoly", "Details", new { id = item.Identyfikator }) |
+            @Html.ActionLink("Usun", "Delete", new { id = item.Identyfikator })
         </td>
     </tr>
 }
