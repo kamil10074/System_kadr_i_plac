@@ -1,0 +1,42 @@
+﻿@model SystemKadr.Models.Wyplaty
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Wyplaty</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Miesiac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Miesiac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wyplata)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wyplata)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pracownicy.Imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pracownicy.Imie)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_tranzakcji }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

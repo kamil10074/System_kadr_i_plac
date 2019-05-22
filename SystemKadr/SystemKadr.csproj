@@ -134,8 +134,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Godziny_przepracowaneController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PracownicyController.cs" />
+    <Compile Include="Controllers\WyplatyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,6 +231,16 @@
     <Content Include="Views\Pracownicy\Details.cshtml" />
     <Content Include="Views\Pracownicy\Edit.cshtml" />
     <Content Include="Views\Pracownicy\Index.cshtml" />
+    <Content Include="Views\Godziny_przepracowane\Create.cshtml" />
+    <Content Include="Views\Godziny_przepracowane\Delete.cshtml" />
+    <Content Include="Views\Godziny_przepracowane\Details.cshtml" />
+    <Content Include="Views\Godziny_przepracowane\Edit.cshtml" />
+    <Content Include="Views\Godziny_przepracowane\Index.cshtml" />
+    <Content Include="Views\Wyplaty\Create.cshtml" />
+    <Content Include="Views\Wyplaty\Delete.cshtml" />
+    <Content Include="Views\Wyplaty\Details.cshtml" />
+    <Content Include="Views\Wyplaty\Edit.cshtml" />
+    <Content Include="Views\Wyplaty\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
