@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<SystemKadr.Models.Pracownicy>
-
+@{ 
+    if (Session["Identyfikator"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
+}
 @{
     ViewBag.Title = "Index";
 }

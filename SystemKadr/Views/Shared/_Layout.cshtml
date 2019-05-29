@@ -23,8 +23,13 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
                     <li>@Html.ActionLink("Pracownicy", "Index", "Pracownicy")</li>
-                    <li>@Html.ActionLink("Godziny przepracowane", "Index", "Godziny_przepracowane")</li>
-                    <li>@Html.ActionLink("Wyplaty pracownikow", "Index", "Wyplaty")</li>
+                    @{
+                        if (Session["Identyfikator"] != null)
+                        {
+                            <li>@Html.ActionLink("Godziny przepracowane", "Index", "Godziny_przepracowane")</li>
+                            <li>@Html.ActionLink("Wyplaty pracownikow", "Index", "Wyplaty")</li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
@@ -33,7 +38,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year — moja aplikacja platformy ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year Witamy w aplikacji kadr i plac</p>
         </footer>
     </div>
 
