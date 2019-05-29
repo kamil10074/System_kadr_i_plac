@@ -1,5 +1,10 @@
 ﻿@model SystemKadr.Models.Godziny_przepracowane
-
+@{
+    if (Session["Identyfikator"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
+}
 @{
     ViewBag.Title = "Edit";
 }
@@ -10,7 +15,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Godziny_przepracowane</h4>
         <hr />

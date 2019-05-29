@@ -1,5 +1,10 @@
 ﻿@model SystemKadr.Models.Godziny_przepracowane
-
+@{
+    if (Session["Identyfikator"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
+}
 @{
     ViewBag.Title = "Details";
 }

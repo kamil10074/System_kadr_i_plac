@@ -22,12 +22,12 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Pracownicy", "Index", "Pracownicy")</li>
                     @{
                         if (Session["Identyfikator"] != null)
                         {
                             <li>@Html.ActionLink("Godziny przepracowane", "Index", "Godziny_przepracowane")</li>
                             <li>@Html.ActionLink("Wyplaty pracownikow", "Index", "Wyplaty")</li>
+                            <li>@Html.ActionLink("Pracownicy", "Index", "Pracownicy")</li>
                         }
                     }
                 </ul>

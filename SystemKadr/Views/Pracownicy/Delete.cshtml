@@ -1,5 +1,10 @@
 ﻿@model SystemKadr.Models.Pracownicy
-
+@{
+    if (Session["Identyfikator"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
+}
 @{
     ViewBag.Title = "Delete";
 }
@@ -85,7 +90,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

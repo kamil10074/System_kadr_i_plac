@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<SystemKadr.Models.Godziny_przepracowane>
-
+@{
+    if (Session["Identyfikator"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
+}
 @{
     ViewBag.Title = "Index";
 }
@@ -23,23 +28,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Godziny)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pracownicy.Imie)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_wpisu }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_wpisu }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_wpisu })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Godziny)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pracownicy.Imie)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id_wpisu }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id_wpisu }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id_wpisu })
+            </td>
+        </tr>
+    }
 
 </table>
