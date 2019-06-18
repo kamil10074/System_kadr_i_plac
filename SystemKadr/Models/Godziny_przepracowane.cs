@@ -14,11 +14,19 @@ namespace SystemKadr.Models
     
     public partial class Godziny_przepracowane
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Godziny_przepracowane()
+        {
+            this.Wyplaty = new HashSet<Wyplaty>();
+        }
+    
         public int Id_wpisu { get; set; }
         public Nullable<int> Identyfikator { get; set; }
-        public Nullable<System.DateTime> Data { get; set; }
+        public string Miesiac { get; set; }
         public Nullable<int> Godziny { get; set; }
     
         public virtual Pracownicy Pracownicy { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Wyplaty> Wyplaty { get; set; }
     }
 }

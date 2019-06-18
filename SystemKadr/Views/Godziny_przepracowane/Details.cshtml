@@ -1,10 +1,5 @@
 ﻿@model SystemKadr.Models.Godziny_przepracowane
-@{
-    if (Session["Identyfikator"] == null)
-    {
-        Response.Redirect("~/Home/Index");
-    }
-}
+
 @{
     ViewBag.Title = "Details";
 }
@@ -16,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Data)
+            @Html.DisplayNameFor(model => model.Miesiac)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Data)
+            @Html.DisplayFor(model => model.Miesiac)
         </dd>
 
         <dt>

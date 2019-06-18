@@ -52,6 +52,18 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -192,6 +204,10 @@
       <DependentUpon>KadryDBModel.edmx</DependentUpon>
       <LastGenOutput>KadryDBModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\KadryDBModel.edmx">
@@ -201,6 +217,7 @@
     <Content Include="Models\KadryDBModel.edmx.diagram">
       <DependentUpon>KadryDBModel.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -229,19 +246,20 @@
     <Content Include="Views\Pracownicy\Details.cshtml" />
     <Content Include="Views\Pracownicy\Edit.cshtml" />
     <Content Include="Views\Pracownicy\Index.cshtml" />
-    <Content Include="Views\Godziny_przepracowane\Create.cshtml" />
-    <Content Include="Views\Godziny_przepracowane\Delete.cshtml" />
-    <Content Include="Views\Godziny_przepracowane\Details.cshtml" />
-    <Content Include="Views\Godziny_przepracowane\Edit.cshtml" />
-    <Content Include="Views\Godziny_przepracowane\Index.cshtml" />
     <Content Include="Views\Wyplaty\Create.cshtml" />
     <Content Include="Views\Wyplaty\Delete.cshtml" />
     <Content Include="Views\Wyplaty\Details.cshtml" />
     <Content Include="Views\Wyplaty\Edit.cshtml" />
     <Content Include="Views\Wyplaty\Index.cshtml" />
+    <Content Include="Views\Godziny_przepracowane\Create.cshtml" />
+    <Content Include="Views\Godziny_przepracowane\Delete.cshtml" />
+    <Content Include="Views\Godziny_przepracowane\Details.cshtml" />
+    <Content Include="Views\Godziny_przepracowane\Edit.cshtml" />
+    <Content Include="Views\Godziny_przepracowane\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

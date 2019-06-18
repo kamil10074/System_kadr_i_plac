@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rotativa;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,8 +18,14 @@ namespace SystemKadr.Controllers
         // GET: Wyplaty
         public ActionResult Index()
         {
-            var wyplaty = db.Wyplaty.Include(w => w.Pracownicy);
+            var wyplaty = db.Wyplaty.Include(w => w.Godziny_przepracowane).Include(w => w.Pracownicy);
             return View(wyplaty.ToList());
+        }
+
+        public ActionResult Print()
+        {
+            var q = new ActionAsPdf("Index");
+            return q;
         }
 
         // GET: Wyplaty/Details/5
@@ -39,6 +46,7 @@ namespace SystemKadr.Controllers
         // GET: Wyplaty/Create
         public ActionResult Create()
         {
+            ViewBag.Id_wpisu = new SelectList(db.Godziny_przepracowane, "Id_wpisu", "Id_wpisu");
             ViewBag.Identyfikator = new SelectList(db.Pracownicy, "Identyfikator", "Imie");
             return View();
         }
@@ -48,7 +56,7 @@ namespace SystemKadr.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_tranzakcji,Identyfikator,Miesiac,Wyplata")] Wyplaty wyplaty)
+        public ActionResult Create([Bind(Include = "Id_tranzakcji,Identyfikator,Miesiac,Wyplata,Godziny,Id_wpisu")] Wyplaty wyplaty)
         {
             if (ModelState.IsValid)
             {
@@ -57,6 +65,7 @@ namespace SystemKadr.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Id_wpisu = new SelectList(db.Godziny_przepracowane, "Id_wpisu", "Id_wpisu", wyplaty.Id_wpisu);
             ViewBag.Identyfikator = new SelectList(db.Pracownicy, "Identyfikator", "Imie", wyplaty.Identyfikator);
             return View(wyplaty);
         }
@@ -73,6 +82,7 @@ namespace SystemKadr.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Id_wpisu = new SelectList(db.Godziny_przepracowane, "Id_wpisu", "Id_wpisu", wyplaty.Id_wpisu);
             ViewBag.Identyfikator = new SelectList(db.Pracownicy, "Identyfikator", "Imie", wyplaty.Identyfikator);
             return View(wyplaty);
         }
@@ -82,7 +92,7 @@ namespace SystemKadr.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_tranzakcji,Identyfikator,Miesiac,Wyplata")] Wyplaty wyplaty)
+        public ActionResult Edit([Bind(Include = "Id_tranzakcji,Identyfikator,Miesiac,Wyplata,Godziny,Id_wpisu")] Wyplaty wyplaty)
         {
             if (ModelState.IsValid)
             {
@@ -90,6 +100,7 @@ namespace SystemKadr.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Id_wpisu = new SelectList(db.Godziny_przepracowane, "Id_wpisu", "Id_wpisu", wyplaty.Id_wpisu);
             ViewBag.Identyfikator = new SelectList(db.Pracownicy, "Identyfikator", "Imie", wyplaty.Identyfikator);
             return View(wyplaty);
         }

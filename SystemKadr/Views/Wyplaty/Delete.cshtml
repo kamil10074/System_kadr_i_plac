@@ -1,10 +1,5 @@
 ﻿@model SystemKadr.Models.Wyplaty
-@{
-    if (Session["Identyfikator"] == null)
-    {
-        Response.Redirect("~/Home/Index");
-    }
-}
+
 @{
     ViewBag.Title = "Delete";
 }
@@ -33,6 +28,22 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Godziny)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Godziny)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Godziny_przepracowane.Id_wpisu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Godziny_przepracowane.Id_wpisu)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Pracownicy.Imie)
         </dt>
 
@@ -42,8 +53,7 @@
 
     </dl>
 
-    @using (Html.BeginForm())
-    {
+    @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

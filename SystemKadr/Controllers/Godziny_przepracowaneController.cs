@@ -39,7 +39,7 @@ namespace SystemKadr.Controllers
         // GET: Godziny_przepracowane/Create
         public ActionResult Create()
         {
-            ViewBag.Identyfikator = new SelectList(db.Pracownicy, "Identyfikator", "Imie");
+            ViewBag.Identyfikator = new SelectList(db.Pracownicy, "Identyfikator", "Identyfikator");
             return View();
         }
 
@@ -48,7 +48,7 @@ namespace SystemKadr.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_wpisu,Identyfikator,Data,Godziny")] Godziny_przepracowane godziny_przepracowane)
+        public ActionResult Create([Bind(Include = "Id_wpisu,Identyfikator,Miesiac,Godziny")] Godziny_przepracowane godziny_przepracowane)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +57,7 @@ namespace SystemKadr.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Identyfikator = new SelectList(db.Pracownicy, "Identyfikator", "Imie", godziny_przepracowane.Identyfikator);
+            ViewBag.Identyfikator = new SelectList(db.Pracownicy, "Identyfikator", "Identyfikator", godziny_przepracowane.Identyfikator);
             return View(godziny_przepracowane);
         }
 
@@ -82,7 +82,7 @@ namespace SystemKadr.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_wpisu,Identyfikator,Data,Godziny")] Godziny_przepracowane godziny_przepracowane)
+        public ActionResult Edit([Bind(Include = "Id_wpisu,Identyfikator,Miesiac,Godziny")] Godziny_przepracowane godziny_przepracowane)
         {
             if (ModelState.IsValid)
             {

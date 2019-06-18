@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Id_wpisu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Identyfikator" Type="int" />
-          <Property Name="Data" Type="date" />
+          <Property Name="Miesiac" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Godziny" Type="int" />
         </EntityType>
         <EntityType Name="Pracownicy">
@@ -51,6 +51,8 @@
           <Property Name="Identyfikator" Type="int" />
           <Property Name="Miesiac" Type="nchar" MaxLength="10" />
           <Property Name="Wyplata" Type="float" />
+          <Property Name="Godziny" Type="int" />
+          <Property Name="Id_wpisu" Type="int" />
         </EntityType>
         <Association Name="FK_Godziny_przepracowane_ToTable">
           <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1" />
@@ -88,7 +90,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Wyplaty_ToTable">
+        <Association Name="FK_Wyplaty_ToTable_1">
           <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1" />
           <End Role="Wyplaty" Type="Self.Wyplaty" Multiplicity="*" />
           <ReferentialConstraint>
@@ -97,6 +99,18 @@
             </Principal>
             <Dependent Role="Wyplaty">
               <PropertyRef Name="Identyfikator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GodzinyFK">
+          <End Role="Godziny_przepracowane" Type="Self.Godziny_przepracowane" Multiplicity="0..1" />
+          <End Role="Wyplaty" Type="Self.Wyplaty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Godziny_przepracowane">
+              <PropertyRef Name="Id_wpisu" />
+            </Principal>
+            <Dependent Role="Wyplaty">
+              <PropertyRef Name="Id_wpisu" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -118,8 +132,12 @@
             <End Role="Wydzialy" EntitySet="Wydzialy" />
             <End Role="Pracownicy" EntitySet="Pracownicy" />
           </AssociationSet>
-          <AssociationSet Name="FK_Wyplaty_ToTable" Association="Self.FK_Wyplaty_ToTable">
+          <AssociationSet Name="FK_Wyplaty_ToTable_1" Association="Self.FK_Wyplaty_ToTable_1">
             <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Wyplaty" EntitySet="Wyplaty" />
+          </AssociationSet>
+          <AssociationSet Name="GodzinyFK" Association="Self.GodzinyFK">
+            <End Role="Godziny_przepracowane" EntitySet="Godziny_przepracowane" />
             <End Role="Wyplaty" EntitySet="Wyplaty" />
           </AssociationSet>
         </EntityContainer>
@@ -134,9 +152,10 @@
           </Key>
           <Property Name="Id_wpisu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Identyfikator" Type="Int32" />
-          <Property Name="Data" Type="DateTime" Precision="0" />
+          <Property Name="Miesiac" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Godziny" Type="Int32" />
           <NavigationProperty Name="Pracownicy" Relationship="Self.FK_Godziny_przepracowane_ToTable" FromRole="Godziny_przepracowane" ToRole="Pracownicy" />
+          <NavigationProperty Name="Wyplaty" Relationship="Self.GodzinyFK" FromRole="Godziny_przepracowane" ToRole="Wyplaty" />
         </EntityType>
         <EntityType Name="Pracownicy">
           <Key>
@@ -155,7 +174,7 @@
           <NavigationProperty Name="Godziny_przepracowane" Relationship="Self.FK_Godziny_przepracowane_ToTable" FromRole="Pracownicy" ToRole="Godziny_przepracowane" />
           <NavigationProperty Name="Role" Relationship="Self.FK_Pracownicy_ToTable" FromRole="Pracownicy" ToRole="Role" />
           <NavigationProperty Name="Wydzialy" Relationship="Self.FK_Pracownicy_ToTable_1" FromRole="Pracownicy" ToRole="Wydzialy" />
-          <NavigationProperty Name="Wyplaty" Relationship="Self.FK_Wyplaty_ToTable" FromRole="Pracownicy" ToRole="Wyplaty" />
+          <NavigationProperty Name="Wyplaty" Relationship="Self.FK_Wyplaty_ToTable_1" FromRole="Pracownicy" ToRole="Wyplaty" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -181,7 +200,10 @@
           <Property Name="Identyfikator" Type="Int32" />
           <Property Name="Miesiac" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Wyplata" Type="Double" />
-          <NavigationProperty Name="Pracownicy" Relationship="Self.FK_Wyplaty_ToTable" FromRole="Wyplaty" ToRole="Pracownicy" />
+          <Property Name="Godziny" Type="Int32" />
+          <Property Name="Id_wpisu" Type="Int32" />
+          <NavigationProperty Name="Godziny_przepracowane" Relationship="Self.GodzinyFK" FromRole="Wyplaty" ToRole="Godziny_przepracowane" />
+          <NavigationProperty Name="Pracownicy" Relationship="Self.FK_Wyplaty_ToTable_1" FromRole="Wyplaty" ToRole="Pracownicy" />
         </EntityType>
         <Association Name="FK_Godziny_przepracowane_ToTable">
           <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1" />
@@ -192,6 +214,18 @@
             </Principal>
             <Dependent Role="Godziny_przepracowane">
               <PropertyRef Name="Identyfikator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GodzinyFK">
+          <End Role="Godziny_przepracowane" Type="Self.Godziny_przepracowane" Multiplicity="0..1" />
+          <End Role="Wyplaty" Type="Self.Wyplaty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Godziny_przepracowane">
+              <PropertyRef Name="Id_wpisu" />
+            </Principal>
+            <Dependent Role="Wyplaty">
+              <PropertyRef Name="Id_wpisu" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -219,7 +253,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Wyplaty_ToTable">
+        <Association Name="FK_Wyplaty_ToTable_1">
           <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1" />
           <End Role="Wyplaty" Type="Self.Wyplaty" Multiplicity="*" />
           <ReferentialConstraint>
@@ -231,7 +265,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="KadryDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="KadryDBEntities11" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Godziny_przepracowane" EntityType="Self.Godziny_przepracowane" />
           <EntitySet Name="Pracownicy" EntityType="Self.Pracownicy" />
           <EntitySet Name="Role" EntityType="Self.Role" />
@@ -241,6 +275,10 @@
             <End Role="Pracownicy" EntitySet="Pracownicy" />
             <End Role="Godziny_przepracowane" EntitySet="Godziny_przepracowane" />
           </AssociationSet>
+          <AssociationSet Name="GodzinyFK" Association="Self.GodzinyFK">
+            <End Role="Godziny_przepracowane" EntitySet="Godziny_przepracowane" />
+            <End Role="Wyplaty" EntitySet="Wyplaty" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pracownicy_ToTable" Association="Self.FK_Pracownicy_ToTable">
             <End Role="Role" EntitySet="Role" />
             <End Role="Pracownicy" EntitySet="Pracownicy" />
@@ -249,7 +287,7 @@
             <End Role="Wydzialy" EntitySet="Wydzialy" />
             <End Role="Pracownicy" EntitySet="Pracownicy" />
           </AssociationSet>
-          <AssociationSet Name="FK_Wyplaty_ToTable" Association="Self.FK_Wyplaty_ToTable">
+          <AssociationSet Name="FK_Wyplaty_ToTable_1" Association="Self.FK_Wyplaty_ToTable_1">
             <End Role="Pracownicy" EntitySet="Pracownicy" />
             <End Role="Wyplaty" EntitySet="Wyplaty" />
           </AssociationSet>
@@ -259,13 +297,13 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="KadryDBModelStoreContainer" CdmEntityContainer="KadryDBEntities">
+        <EntityContainerMapping StorageEntityContainer="KadryDBModelStoreContainer" CdmEntityContainer="KadryDBEntities11">
           <EntitySetMapping Name="Godziny_przepracowane">
             <EntityTypeMapping TypeName="KadryDBModel.Godziny_przepracowane">
               <MappingFragment StoreEntitySet="Godziny_przepracowane">
                 <ScalarProperty Name="Id_wpisu" ColumnName="Id_wpisu" />
                 <ScalarProperty Name="Identyfikator" ColumnName="Identyfikator" />
-                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Miesiac" ColumnName="Miesiac" />
                 <ScalarProperty Name="Godziny" ColumnName="Godziny" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -309,6 +347,8 @@
                 <ScalarProperty Name="Identyfikator" ColumnName="Identyfikator" />
                 <ScalarProperty Name="Miesiac" ColumnName="Miesiac" />
                 <ScalarProperty Name="Wyplata" ColumnName="Wyplata" />
+                <ScalarProperty Name="Godziny" ColumnName="Godziny" />
+                <ScalarProperty Name="Id_wpisu" ColumnName="Id_wpisu" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

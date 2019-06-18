@@ -18,7 +18,10 @@ namespace SystemKadr.Models
         public Nullable<int> Identyfikator { get; set; }
         public string Miesiac { get; set; }
         public Nullable<double> Wyplata { get; set; }
+        public Nullable<int> Godziny { get; set; }
+        public Nullable<int> Id_wpisu { get; set; }
     
+        public virtual Godziny_przepracowane Godziny_przepracowane { get; set; }
         public virtual Pracownicy Pracownicy { get; set; }
     }
 }
